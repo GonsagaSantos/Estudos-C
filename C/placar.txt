@@ -1,0 +1,7 @@
+JOGADOR    VITORIAS
+vulha      3
+vilha      0
+vvelha      1
+
+-
+
