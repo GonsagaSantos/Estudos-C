@@ -22,7 +22,7 @@ typedef struct {
 void inicializarBaralho(Carta baralho[], As baralho_as[]) {
     const char *nome[] = {"As", "Dois", "Tres", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", "Dez", "Valete", "Dama", "Rei"};
     const char *naipe[] = {"Copas", "Espadas", "Ouros", "Paus"};
-    int valor[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+    int valor[] = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
 
     int index = 0;
     for (int i = 0; i < 4; i++) {
@@ -67,29 +67,40 @@ int main() {
     for (int i = 0; i < 6; i++) {
 
         if(i < 2) {
-            acumulador_jogador += baralho[i].valor;
-            printf("Sua carta %i é %10s de %9s, %i -------- Acumulador: %i\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_jogador); 
 
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[-1].valor == 10) {
+            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor == 10 || strcmp(baralho[i].nome, "As") == 0 && baralho[i + 1].valor == 10) {
                 baralho[i].valor = 1; // Se a mão do jogador tiver uma dama, rei, valete (qualquer carta que valha 10), então o As passa a valer 1
             }
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[-1].valor < 10){
+            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor < 10){
                 baralho[i].valor = 11; // Senão, o As passa a valer 11
             }
+
+            acumulador_jogador += baralho[i].valor;
+            
+            printf("Sua carta %i é %10s de %9s, %i -------- Acumulador: %i\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_jogador); 
+
         }
 
         if(i >= 2 && i < 5) {
-            printf("A carta %i do Dealer é %10s de %9s, %i -------- Acumulador: %i\n\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_dealer); 
-
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[-1].valor == 10) {
+            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor == 10 || strcmp(baralho[i].nome, "As") == 0 && baralho[i + 1].valor == 10) {
                 baralho[i].valor = 1; // Se a mão do jogador tiver uma dama, rei, valete (qualquer carta que valha 10), então o As passa a valer 1
             }
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[-1].valor != 10){
+            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i-1].valor != 10){
                 baralho[i].valor = 11; // Senão, o As passa a valer 11
             }
 
-            acumulador_dealer += baralho[i].valor;
+            printf("A carta %i do Dealer é %10s de %9s, %i -------- Acumulador: %i\n\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_dealer); 
+            
+            if(i == 5) {
+                acumulador_dealer -= baralho[i].valor;
+            }
+            else {
+                acumulador_dealer += baralho[i].valor;
+            }
+
         }
+        
+
     }
 
     printf("\nAcumulador Jogador: %i ----------- Acumulador Dealer: %i", acumulador_jogador, acumulador_dealer);
