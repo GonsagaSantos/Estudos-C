@@ -15,7 +15,7 @@ int main() {
     //char cobra = "*";
 
 	srand(time(NULL));
-	int foodX = LINES % 20, foodY = COLS % 20;
+	int foodX = rand() % LINES , foodY = rand() % COLS ;
 
 	while(true) {
 

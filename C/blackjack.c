@@ -63,57 +63,57 @@ int main() {
     embaralhamento(baralho, 52);
 
     int acumulador_jogador = 0, acumulador_dealer = 0;
-    // Mostra as duas cartas do jogador
-    for (int i = 0; i < 6; i++) {
-
-        if(i < 2) {
-
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor == 10 || strcmp(baralho[i].nome, "As") == 0 && baralho[i + 1].valor == 10) {
-                baralho[i].valor = 1; // Se a mão do jogador tiver uma dama, rei, valete (qualquer carta que valha 10), então o As passa a valer 1
-            }
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor < 10){
-                baralho[i].valor = 11; // Senão, o As passa a valer 11
-            }
-
-            acumulador_jogador += baralho[i].valor;
-            
-            printf("Sua carta %i é %10s de %9s, %i -------- Acumulador: %i\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_jogador); 
-
-        }
-
-        if(i >= 2 && i < 5) {
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor == 10 || strcmp(baralho[i].nome, "As") == 0 && baralho[i + 1].valor == 10) {
-                baralho[i].valor = 1; // Se a mão do jogador tiver uma dama, rei, valete (qualquer carta que valha 10), então o As passa a valer 1
-            }
-            if(strcmp(baralho[i].nome, "As") == 0 && baralho[i-1].valor != 10){
-                baralho[i].valor = 11; // Senão, o As passa a valer 11
-            }
-
-            printf("A carta %i do Dealer é %10s de %9s, %i -------- Acumulador: %i\n\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_dealer); 
-            
-            if(i == 5) {
-                acumulador_dealer -= baralho[i].valor;
-            }
-            else {
-                acumulador_dealer += baralho[i].valor;
-            }
-
-        }
-        
-
-    }
-
-    printf("\nAcumulador Jogador: %i ----------- Acumulador Dealer: %i", acumulador_jogador, acumulador_dealer);
-
-    if(acumulador_jogador >= 21) {
-        printf("\nBlackJack natural. Parabéns! Você fez o impossível.           %i\n", acumulador_jogador);
-        return 0;
-    }
-
     char pedir[] = "pedir", parar[] = "parar", dividir[] = "dividir", desistir[] = "desistir", jogada[9];
     bool endGame = false;
 
-    while(!endGame) {
+    while(true) {
+    // Mostra as duas cartas do jogador
+        for (int i = 0; i < 6; i++) {
+
+            if(i < 2) {
+
+                if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor == 10 || strcmp(baralho[i].nome, "As") == 0 && baralho[i + 1].valor == 10) {
+                    baralho[i].valor = 1; // Se a mão do jogador tiver uma dama, rei, valete (qualquer carta que valha 10), então o As passa a valer 1
+                }
+                if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor < 10){
+                    baralho[i].valor = 11; // Senão, o As passa a valer 11
+                }
+
+                acumulador_jogador += baralho[i].valor;
+                
+                printf("Sua carta %i é %10s de %9s, %i -------- Acumulador: %i\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_jogador); 
+
+            }
+
+            if(i >= 2 && i < 5) {
+                if(strcmp(baralho[i].nome, "As") == 0 && baralho[i - 1].valor == 10 || strcmp(baralho[i].nome, "As") == 0 && baralho[i + 1].valor == 10) {
+                    baralho[i].valor = 1; // Se a mão do jogador tiver uma dama, rei, valete (qualquer carta que valha 10), então o As passa a valer 1
+                }
+                if(strcmp(baralho[i].nome, "As") == 0 && baralho[i-1].valor != 10){
+                    baralho[i].valor = 11; // Senão, o As passa a valer 11
+                }
+
+                printf("A carta %i do Dealer é %10s de %9s, %i -------- Acumulador: %i\n\n", i + 1, baralho[i].nome, baralho[i].naipe, baralho[i].valor, acumulador_dealer); 
+                
+                if(i == 5) {
+                    acumulador_dealer -= baralho[i].valor;
+                }
+                else {
+                    acumulador_dealer += baralho[i].valor;
+                }
+
+            }
+            
+        }
+
+        printf("\nAcumulador Jogador: %i ----------- Acumulador Dealer: %i", acumulador_jogador, acumulador_dealer);
+
+        if(acumulador_jogador >= 21) {
+            printf("\nBlackJack natural. Parabéns! Você fez o impossível.           %i\n", acumulador_jogador);
+            return 0;
+        }
+
+
         printf("\nSua vez!\nQual será sua jogada?\n> ");
         scanf("%9s", &jogada);
 
@@ -121,7 +121,7 @@ int main() {
             embaralhamento(baralho, 52);
             printf("\nSua nova carta é: %10s de %9s, %i", baralho[0].nome, baralho[0].naipe, baralho[0].valor);
             acumulador_jogador += baralho[0].valor;
-            
+                
             if(acumulador_jogador >= 21){
                 printf("\nVocê perdeu! Acumulador: %i", acumulador_jogador);
                 break;

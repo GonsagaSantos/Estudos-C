@@ -21,45 +21,48 @@ void desenha_forca(int forca) {
     printf("  _______\n");
     printf(" |       |\n");
 
-    if (forca >= 1) {
-        printf(" |       O\n");
-    } else {
-        printf(" |       \n");
-    }
-
-    if (forca >= 2) {
-        printf(" |       |\n");
-    } else {
-        printf(" |       \n");
-    }
-
-    if (forca >= 3) {
-        printf(" |      /|\n");
-    } else {
-        printf(" |       \n");
-    }
-
-    if (forca >= 4) {
-        printf(" |      /|\\\n");
-    } else {
-        printf(" |       \n");
-    }
-
-    if (forca >= 5) {
-        printf(" |      /\n");
-    } else {
-        printf(" |       \n");
-    }
-
-    if (forca >= 6) {
-        printf(" |      / \\\n");
-    } else {
-        printf(" |       \n");
-    }
+    switch (forca) {
+        case 6:
+            printf(" |       O\n");
+            printf(" |      /|\\\n");
+            printf(" |      / \\\n");
+            break;
+        case 5:
+            printf(" |       O\n");
+            printf(" |      /|\\\n");
+            printf(" |      /\n");
+            break;
+        case 4:
+            printf(" |       O\n");
+            printf(" |      /|\\\n");
+            printf(" |\n");
+            break;
+        case 3:
+            printf(" |       O\n");
+            printf(" |      /|\n");
+            printf(" |\n");
+            break;
+        case 2:
+            printf(" |       O\n");
+            printf(" |       |\n");
+            printf(" |\n");
+            break;
+        case 1:
+            printf(" |       O\n");
+            printf(" |\n");
+            printf(" |\n");
+            break;
+        default:
+            printf(" |\n");
+            printf(" |\n");
+            printf(" |\n");
+            break;
+        }
 
     printf(" |\n");
     printf("_|_\n");
     printf("\n");
+
 }
 
 int main() {

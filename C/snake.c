@@ -13,6 +13,7 @@ int main() {
     int posX = 10, posY = 5;
     int dirX = 1, dirY = 1;
     
+
     srand(time(NULL)); // Inicializa o gerador de números aleatórios
 
     int foodX = rand() % 20, foodY = rand() & 20;
